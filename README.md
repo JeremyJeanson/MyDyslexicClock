@@ -1,8 +1,18 @@
-# MyDyslexicClock
+# Description
 A really simple and fun clock that use a font designed to make life easier for dyslexic people.
 This clock is build for fitbit smartwatchs (Ionic and Versa).
 
 ![Ionic screenshot 1](Screenshots/ionic1.png)
+
+# Fetures
+It include :
+- Clock.
+- Date.
+- Battery indicator.
+- Heart Rate Monitor.
+- Settings to change colors.
+
+Let me know if you need more ;)
 
 # Demo
 This clock can be installed on your Ionic or Versa via this link: [Fitbit store](https://gam.fitbit.com/gallery/clock/48887b66-82c6-43c8-8723-0217f31efe06)
