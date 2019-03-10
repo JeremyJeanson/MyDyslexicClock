@@ -1,0 +1,33 @@
+{
+  "name": "mydyslexicclock",
+  "description": "a clock for Fitbit OS",
+  "license": "MIT",
+  "repository": {},
+  "devDependencies": {
+    "@fitbit/sdk": "~3.0.0",
+    "@fitbit/sdk-cli": "^1.5.0",
+    "fitbit-sdk-types": "^3.0.0"
+  },
+  "fitbit": {
+    "appUUID": "fc4e5b75-8089-4a1c-8739-fdf463f5a1c3",
+    "appType": "clockface",
+    "appDisplayName": "MyDyslexicClock",
+    "requestedPermissions": [
+      "access_heart_rate",
+      "access_user_profile"
+    ],
+    "buildTargets": [
+      "higgs",
+      "meson"
+    ],
+    "i18n": {},
+    "defaultLanguage": "en-US"
+  },
+  "scripts": {
+    "build": "fitbit-build",
+    "debug": "fitbit"
+  },
+  "dependencies": {
+    "io-ts": "^1.4.1"
+  }
+}
