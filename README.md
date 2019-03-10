@@ -4,7 +4,7 @@ This clock is build for fitbit smartwatchs (Ionic and Versa).
 
 ![Ionic screenshot 1](Screenshots/ionic1.png)
 
-# Fetures
+# Features
 It include :
 - Clock.
 - Date.
