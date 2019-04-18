@@ -22,6 +22,7 @@ export function initialize(callback:(settings:any)=>void) : void {
 // Received message containing settings data
 messaging.peerSocket.addEventListener("message", function(evt):void {
   settings[evt.data.key] = evt.data.value;
+  console.info("setting -> " + evt.data.key + "=" + evt.data.value);
   onsettingschange(settings);
 });
 

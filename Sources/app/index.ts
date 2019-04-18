@@ -20,13 +20,15 @@ const dates = dateContainer.getElementsByTagName("image") as ImageElement[];
 const cloks = document.getElementById("clock-container").getElementsByTagName("image") as ImageElement[];
 
 // Battery
-const batteryValue = document.getElementById("battery-bar-value") as GradientRectElement;
-const batteries = document.getElementById("battery-container").getElementsByTagName("image") as ImageElement[];
+const _batteryBarContainer = document.getElementById("battery-bar-container") as GraphicsElement;
+const _batteryBar = document.getElementById("battery-bar-value") as GradientRectElement;
+const _batteriesContainer = document.getElementById("battery-container") as GraphicsElement;
+const _batteries = _batteriesContainer.getElementsByTagName("image") as ImageElement[];
 
 // Heart rate management
 const iconHRM = document.getElementById("hrm-symbol") as GraphicsElement;
 const imgHRM = document.getElementById("hrm-image") as ImageElement;
-const hrmTexts = document.getElementById("hrm-text-container") .getElementsByTagName("image") as ImageElement[];
+const hrmTexts = document.getElementById("hrm-text-container").getElementsByTagName("image") as ImageElement[];
 // --------------------------------------------------------------------------------
 // Clock
 // --------------------------------------------------------------------------------
@@ -36,24 +38,24 @@ simpleMinutes.initialize("minutes", (hours, mins, date) => {
   // mins="88";
   // date = "january 20";
   // Hours
-  if(hours) {
-    cloks[0].href = util.getImageFromLeft(hours,0);
-    cloks[1].href = util.getImageFromLeft(hours,1);
+  if (hours) {
+    cloks[0].href = util.getImageFromLeft(hours, 0);
+    cloks[1].href = util.getImageFromLeft(hours, 1);
   }
 
   // Minutes
-  if(mins) {    
-    cloks[3].href = util.getImageFromLeft(mins,0);
-    cloks[4].href = util.getImageFromLeft(mins,1);  
+  if (mins) {
+    cloks[3].href = util.getImageFromLeft(mins, 0);
+    cloks[4].href = util.getImageFromLeft(mins, 1);
   }
 
   // Date
-  if(date) {
+  if (date) {
     // Position
     dateContainer.x = (device.screen.width / 2) - (date.length * 10);
 
     // Values
-    for(let i=0; i<dates.length; i++){
+    for (let i = 0; i < dates.length; i++) {
       dates[i].href = util.getImageFromLeft(date, i);
     }
   }
@@ -65,15 +67,15 @@ simpleMinutes.initialize("minutes", (hours, mins, date) => {
 import * as batterySimple from "./simple/power-battery";
 
 // Method to update battery level informations
-batterySimple.initialize((battery)=>{
+batterySimple.initialize((battery) => {
   let batteryString = battery.toString() + "%";
   // Battery bar
-  batteryValue.width = Math.floor(battery) * device.screen.width / 100;
+  _batteryBar.width = Math.floor(battery) * device.screen.width / 100;
 
   // Battery text
-  let max = batteries.length - 1;
-  for(let i=0; i<max; i++){
-    batteries[i+1].href = util.getImageFromLeft(batteryString,i);  
+  let max = _batteries.length - 1;
+  for (let i = 0; i < max; i++) {
+    _batteries[i + 1].href = util.getImageFromLeft(batteryString, i);
   }
 });
 // --------------------------------------------------------------------------------
@@ -81,9 +83,21 @@ batterySimple.initialize((battery)=>{
 // --------------------------------------------------------------------------------
 import * as simpleSettings from "./simple/device-settings";
 
-simpleSettings.initialize((settings:any) => {
+simpleSettings.initialize((settings: any) => {
   if (!settings) {
     return;
+  }
+
+  if (settings.showBatteryPourcentage !== undefined) {
+    _batteriesContainer.style.display = settings.showBatteryPourcentage === true
+      ? "inline"
+      : "none";
+  }
+
+  if (settings.showBatteryBar !== undefined) {
+    _batteryBarContainer.style.display = settings.showBatteryBar === true
+      ? "inline"
+      : "none";
   }
 
   if (settings.colorBackground) {
@@ -100,7 +114,7 @@ simpleSettings.initialize((settings:any) => {
 // --------------------------------------------------------------------------------
 import * as simpleHRM from "./simple/hrm";
 
-simpleHRM.initialize((bpm, zone, restingHeartRate)=> {
+simpleHRM.initialize((bpm, zone, restingHeartRate) => {
   if (zone === "out-of-range") {
     imgHRM.href = "images/stat_hr_open_48px.png";
   } else {

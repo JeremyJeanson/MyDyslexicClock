@@ -64,7 +64,7 @@
   width: 24;
   height: 24;
 }
-.battery-bar-container{
+#battery-bar-container{
   x: 0;
   y: 100%-10;
 }
