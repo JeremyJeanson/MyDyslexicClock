@@ -6,13 +6,15 @@ import { user } from "user-profile";
 type DefaultZone = 'out-of-range' | 'fat-burn' | 'cardio' | 'peak';
 type UserDefinedZone = 'below-custom' | 'custom' | 'above-custom';
 
-let hrm:HeartRateSensor;
-let watchID:number;
-let hrmCallback:(bpm:string, zone:DefaultZone|UserDefinedZone, restingHeartRate:number)=>void;
+let hrm: HeartRateSensor;
+let watchID: number;
+let hrmCallback: (bpm: string, zone: DefaultZone | UserDefinedZone, restingHeartRate: number) => void;
 let lastReading = 0;
 
-export function initialize(callback:(bpm:string, zone:DefaultZone|UserDefinedZone, restingHeartRate:number)=>void) : void {
-  if (me.permissions.granted("access_heart_rate") && me.permissions.granted("access_user_profile")) {
+export function initialize(callback: (bpm: string, zone: DefaultZone | UserDefinedZone, restingHeartRate: number) => void): void {
+  if (HeartRateSensor
+    && me.permissions.granted("access_heart_rate")
+    && me.permissions.granted("access_user_profile")) {
     hrmCallback = callback;
     hrm = new HeartRateSensor();
     setupEvents();
@@ -25,11 +27,11 @@ export function initialize(callback:(bpm:string, zone:DefaultZone|UserDefinedZon
 }
 
 function getReading() {
-  let heartRate:string;
+  let heartRate: string;
   if (hrm.timestamp === lastReading) {
     heartRate = "--";
   } else {
-    heartRate = (hrm.heartRate|0).toString();
+    heartRate = (hrm.heartRate | 0).toString();
   }
   lastReading = hrm.timestamp;
   hrmCallback(
@@ -38,8 +40,8 @@ function getReading() {
     user.restingHeartRate);
 }
 
-function setupEvents() : void {
-  display.addEventListener("change", function() {
+function setupEvents(): void {
+  display.addEventListener("change", function () {
     if (display.on) {
       start();
     } else {
@@ -48,7 +50,7 @@ function setupEvents() : void {
   });
 }
 
-function start() : void {
+function start(): void {
   if (!watchID) {
     hrm.start();
     getReading();
@@ -56,7 +58,7 @@ function start() : void {
   }
 }
 
-function stop() : void {
+function stop(): void {
   hrm.stop();
   clearInterval(watchID);
   watchID = null;

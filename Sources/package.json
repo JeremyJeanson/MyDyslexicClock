@@ -4,9 +4,9 @@
   "license": "MIT",
   "repository": {},
   "devDependencies": {
-    "@fitbit/sdk": "~3.1.0",
-    "@fitbit/sdk-cli": "^1.6.0",
-    "fitbit-sdk-types": "4.0.0"
+    "@fitbit/sdk": "4.1.0",
+    "@fitbit/sdk-cli": "1.7.1",
+    "fitbit-sdk-types": "4.3.5"
   },
   "fitbit": {
     "appUUID": "fc4e5b75-8089-4a1c-8739-fdf463f5a1c3",
@@ -19,7 +19,8 @@
     "buildTargets": [
       "higgs",
       "meson",
-      "gemini"
+      "gemini",
+      "mira"
     ],
     "i18n": {},
     "defaultLanguage": "en-US"
@@ -27,8 +28,5 @@
   "scripts": {
     "build": "fitbit-build",
     "debug": "fitbit"
-  },
-  "dependencies": {
-    "io-ts": "^1.4.1"
   }
 }

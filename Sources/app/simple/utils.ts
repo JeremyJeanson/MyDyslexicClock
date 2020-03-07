@@ -32,6 +32,18 @@ function getImage(str:string) : string{
     case "%": 
       str = "pourcent";
       break;
+    case ".": 
+      str = "dot";
+      break;
+    case ",": 
+      str = "comma";
+      break;
   }       
   return `images/${str}.png`;
+}
+
+export function display(text: string, controls: ImageElement[]) {
+  for (let i = 0; i < controls.length; i++) {
+    controls[i].href = getImageFromLeft(text, i);
+  }
 }

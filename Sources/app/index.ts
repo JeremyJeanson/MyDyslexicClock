@@ -13,8 +13,10 @@ const background = document.getElementById("background") as RectElement;
 const batteryBackground = document.getElementById("battery-bar-background") as GradientArcElement;
 
 // Date
-const dateContainer = document.getElementById("date-container") as GraphicsElement;
-const dates = dateContainer.getElementsByTagName("image") as ImageElement[];
+const dates1Container = document.getElementById("date1-container") as GraphicsElement;
+const dates1 = dates1Container.getElementsByTagName("image") as ImageElement[];
+const dates2Container = document.getElementById("date2-container") as GraphicsElement;
+const dates2 = dates2Container.getElementsByTagName("image") as ImageElement[];
 
 // Hours
 const cloks = document.getElementById("clock-container").getElementsByTagName("image") as ImageElement[];
@@ -33,31 +35,43 @@ const hrmTexts = document.getElementById("hrm-text-container").getElementsByTagN
 // Clock
 // --------------------------------------------------------------------------------
 // Update the clock every minute
-simpleMinutes.initialize("minutes", (hours, mins, date) => {
+simpleMinutes.initialize("minutes", (clock) => {
   // hours="88";
   // mins="88";
   // date = "january 20";
   // Hours
-  if (hours) {
-    cloks[0].href = util.getImageFromLeft(hours, 0);
-    cloks[1].href = util.getImageFromLeft(hours, 1);
+  if (clock.Hours !== undefined) {
+    cloks[0].href = util.getImageFromLeft(clock.Hours, 0);
+    cloks[1].href = util.getImageFromLeft(clock.Hours, 1);
   }
 
   // Minutes
-  if (mins) {
-    cloks[3].href = util.getImageFromLeft(mins, 0);
-    cloks[4].href = util.getImageFromLeft(mins, 1);
+  if (clock.Minutes !== undefined) {
+    cloks[3].href = util.getImageFromLeft(clock.Minutes, 0);
+    cloks[4].href = util.getImageFromLeft(clock.Minutes, 1);
   }
 
-  // Date
-  if (date) {
-    // Position
-    dateContainer.x = (device.screen.width / 2) - (date.length * 10);
+  // Date changes
+  if (clock.Date1 !== undefined
+    || clock.Date2 !== undefined
+    || clock.AmOrPm !== undefined) {
 
-    // Values
-    for (let i = 0; i < dates.length; i++) {
-      dates[i].href = util.getImageFromLeft(date, i);
-    }
+    // Format request all the data of the last date
+    const lastDate: simpleMinutes.FormatedDate = simpleMinutes.getLast();
+    const date1: string = lastDate.AmOrPm === ""
+      ? lastDate.Date1
+      : `${lastDate.Date1}, ${lastDate.AmOrPm}`;
+
+    const date2: string = lastDate.AmOrPm === ""
+      ? lastDate.Date2
+      : `${lastDate.Date2}, ${lastDate.AmOrPm}`;
+
+    // Position
+    dates1Container.x = (device.screen.width / 2) - (date1.length * 10);
+    util.display(date1, dates1);
+    // Position
+    dates2Container.x = (device.screen.width / 2) - (date2.length * 10);
+    util.display(date2, dates2);
   }
 });
 
@@ -107,6 +121,11 @@ simpleSettings.initialize((settings: any) => {
 
   if (settings.colorForeground) {
     container.style.fill = settings.colorForeground;
+  }
+
+  // Display based on 12H or 24H format
+  if (settings.clockDisplay24 !== undefined) {
+    simpleMinutes.updateClockDisplay24(settings.clockDisplay24 as boolean);
   }
 });
 // --------------------------------------------------------------------------------
