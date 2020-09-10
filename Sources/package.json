@@ -5,8 +5,10 @@
   "repository": {},
   "devDependencies": {
     "@fitbit/sdk": "4.1.0",
-    "@fitbit/sdk-cli": "1.7.1",
-    "fitbit-sdk-types": "4.3.5"
+    "@fitbit/sdk-cli": "1.7.3",
+    "fitbit-sdk-types": "4.3.9",
+    "tslib": "2.0.1",
+    "simple-fitbit-settings": "2.0.1"
   },
   "fitbit": {
     "appUUID": "fc4e5b75-8089-4a1c-8739-fdf463f5a1c3",
@@ -14,7 +16,8 @@
     "appDisplayName": "MyDyslexicClock",
     "requestedPermissions": [
       "access_heart_rate",
-      "access_user_profile"
+      "access_user_profile",
+      "access_aod"
     ],
     "buildTargets": [
       "higgs",

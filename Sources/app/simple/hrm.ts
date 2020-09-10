@@ -8,10 +8,10 @@ type UserDefinedZone = 'below-custom' | 'custom' | 'above-custom';
 
 let hrm: HeartRateSensor;
 let watchID: number;
-let hrmCallback: (bpm: string, zone: DefaultZone | UserDefinedZone, restingHeartRate: number) => void;
+let hrmCallback: (newValue: boolean, bpm: number, zone: DefaultZone | UserDefinedZone, restingHeartRate: number) => void;
 let lastReading = 0;
 
-export function initialize(callback: (bpm: string, zone: DefaultZone | UserDefinedZone, restingHeartRate: number) => void): void {
+export function initialize(callback: (newValue: boolean, bpm: number, zone: DefaultZone | UserDefinedZone, restingHeartRate: number) => void): void {
   if (HeartRateSensor
     && me.permissions.granted("access_heart_rate")
     && me.permissions.granted("access_user_profile")) {
@@ -22,35 +22,38 @@ export function initialize(callback: (bpm: string, zone: DefaultZone | UserDefin
     lastReading = hrm.timestamp;
   } else {
     console.log("Denied Heart Rate or User Profile permissions");
-    callback("?", null, null);
+    callback(false, 0, null, null);
   }
 }
 
-function getReading() {
-  let heartRate: string;
-  if (hrm.timestamp === lastReading) {
-    heartRate = "--";
-  } else {
-    heartRate = (hrm.heartRate | 0).toString();
-  }
+function getReading(): void {
+  let newValue = hrm.timestamp !== lastReading;
+  let heartRate = hrm.heartRate || 0;
   lastReading = hrm.timestamp;
+
   hrmCallback(
+    newValue,
     heartRate,
-    user.heartRateZone(hrm.heartRate || 0),
+    user.heartRateZone(heartRate),
     user.restingHeartRate);
 }
 
 function setupEvents(): void {
-  display.addEventListener("change", function () {
+  // Dispay chanded
+  display.onchange = (e) => {
     if (display.on) {
       start();
     } else {
       stop();
     }
-  });
+  };
+  // Errors
+  hrm.onerror = (e) => {
+    hrmCallback(false, 0, null, null);
+  };
 }
 
-function start(): void {
+export function start(): void {
   if (!watchID) {
     hrm.start();
     getReading();
@@ -58,7 +61,7 @@ function start(): void {
   }
 }
 
-function stop(): void {
+export function stop(): void {
   hrm.stop();
   clearInterval(watchID);
   watchID = null;
