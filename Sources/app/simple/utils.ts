@@ -1,49 +1,28 @@
-// Add zero in front of numbers < 10
-export function zeroPad(i:number) : string {
-  if (i < 10) {
-    return "0" + i;
-  }
-  return i.toString();
+// Show control
+export function show(control: GraphicsElement): void {
+  control.style.display = "inline";
 }
 
-// Get image url for a char in a string from left
-export function getImageFromLeft(str:string,index:number) : string {
-  if(str.length <= index)
-  {
-    return "";
-  }
-  str = str.substr(index,1);
-  return getImage(str);
+// Hide control
+export function hide(control: GraphicsElement): void {
+  control.style.display = "none";
 }
 
-function getImage(str:string) : string{
-  // Test if a special image is requiered
-  switch(str)
-  {
-    case " ": 
-      str = "space";
-      break;
-    case "é": 
-      str = "eacute";
-      break;
-    case "û": 
-      str = "ucirc";
-      break;
-    case "%": 
-      str = "pourcent";
-      break;
-    case ".": 
-      str = "dot";
-      break;
-    case ",": 
-      str = "comma";
-      break;
-  }       
-  return `images/${str}.png`;
+// Set visibility
+export function setVisibility(control: GraphicsElement, visible: boolean): void {
+  control.style.display = visible
+    ? "inline"
+    : "none";
 }
 
-export function display(text: string, controls: ImageElement[]) {
-  for (let i = 0; i < controls.length; i++) {
-    controls[i].href = getImageFromLeft(text, i);
-  }
+// highlight a control vith animation
+export function highlight(control: GraphicsElement): void {
+  control.animate("highlight");
+}
+
+// update color only when requested
+export function fill(control: GraphicsElement, color: string) {
+  // if (control.style.fill === color) return;
+  // console.warn(`${color} ${control.style.fill}`);
+  control.style.fill = color;
 }

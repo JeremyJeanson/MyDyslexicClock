@@ -21,7 +21,7 @@
 }  
 #clock-container .clock-doublepoints{
   width:8%;
-  href:"images/doublepoints.png";
+  href:"chars/58.png";
 }
 #date-container {
   y: 60%;
@@ -35,7 +35,6 @@
 }
 #battery-container{
   height: 30;
-  width: 100;
   y:100%-40;  
 }
 #battery-container image{
@@ -43,9 +42,24 @@
   width: 24;
   height: 24;
 }
-#battery-container .battery-image{
-  x:2;
-  href:"images/battery.png";
+#battery-text-container{
+  x:30;
+}
+#battery-bar-container{
+  x: 0;
+  y: 100%-10;
+}
+#battery-bar-background{
+  height: 10;
+  width: 100%;
+}
+#battery-bar-value{
+  height: 10;
+  width: 100%;
+}
+#battery-bar-value.low{
+  gradient-color1:orange;
+  gradient-color2:red;
 }
 #hrm-container{
   height: 30;
@@ -65,16 +79,4 @@
   x:$;
   width: 24;
   height: 24;
-}
-#battery-bar-container{
-  x: 0;
-  y: 100%-10;
-}
-#battery-bar-background{
-  height: 10;
-  width: 100%;
-}
-#battery-bar-value{
-  height: 10;
-  width: 100%;
 }

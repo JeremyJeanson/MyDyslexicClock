@@ -1,38 +1,38 @@
 msgid "month01"
-msgstr "JAN"
+msgstr "January"
 
 msgid "month02"
-msgstr "FEB"
+msgstr "February"
 
 msgid "month03"
-msgstr "MAR"
+msgstr "March"
 
 msgid "month04"
-msgstr "APR"
+msgstr "April"
 
 msgid "month05"
-msgstr "MAY"
+msgstr "May"
 
 msgid "month06"
-msgstr "JUN"
+msgstr "June"
 
 msgid "month07"
-msgstr "JUL"
+msgstr "July"
 
 msgid "month08"
-msgstr "AUG"
+msgstr "August"
 
 msgid "month09"
-msgstr "SEP"
+msgstr "September"
 
 msgid "month10"
-msgstr "OCT"
+msgstr "October"
 
 msgid "month11"
-msgstr "NOV"
+msgstr "November"
 
 msgid "month12"
-msgstr "DEC"
+msgstr "December"
 
 msgid "day0"
 msgstr "Sunday"

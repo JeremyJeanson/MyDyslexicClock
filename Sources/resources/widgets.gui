@@ -1,5 +1,6 @@
 <svg>
   <defs>
+    <link rel="stylesheet" href="battery.css" />
     <link rel="stylesheet" href="styles.css" />
     <link rel="import" href="/mnt/sysassets/widgets_common.gui" />
     <link rel="import" href="/mnt/sysassets/widgets/baseview_widget.gui" />
@@ -13,6 +14,17 @@
         <animateTransform attributeName="transform" attributeType="scale"
           begin="highlight+0.433" end="unload;unhighlight" to="1.0"
           repeatCount="indefinite" final="keep" />
+      </g>
+    </symbol>
+    <symbol id="battery">
+      <g transform="translate(50%,50%)">
+        <image id="battery-icon" x="-50%" y="-50%" />
+        <animateTransform attributeName="transform" attributeType="scale"
+          begin="highlight" from="1" to="0.5"
+          final="keep" dur="0.5"/>
+        <animateTransform attributeName="transform" attributeType="scale"
+          begin="highlight+0.5" from="0.5" to="1.5"
+          final="keep" dur="0.5" final="restore"/>
       </g>
     </symbol>
   </defs>

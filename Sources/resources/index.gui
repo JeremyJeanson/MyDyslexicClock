@@ -52,19 +52,21 @@
     </use>
   </use>
   <svg id="battery-container">
-    <image class="battery-image" />
-    <image x="28"/>
-    <image />
-    <image />
-    <image />
+    <use id="battery-symbol" href="#battery"/>
+    <section id="battery-text-container">
+      <image />
+      <image />
+      <image />
+      <image />
+    </section>
   </svg>
   <svg id="hrm-container">
     <use id="hrm-symbol" href="#heart-beat" />
-    <svg id="hrm-text-container">
+    <section id="hrm-text-container">
       <image />
       <image />
       <image />
-    </svg>
+    </section>
   </svg>
   <svg id="battery-bar-container">
     <gradientRect id="battery-bar-background"
